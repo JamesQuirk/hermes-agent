@@ -5,8 +5,20 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
     <meta
       name="viewport"
-      content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover, interactive-widget=resizes-content"
     />
+    <style>
+      /* iOS standalone (Add to Home Screen): env() only reports the real
+         notch/home-indicator insets when viewport-fit=cover is set, so the app
+         shell letterboxes itself here. env() evaluates to 0 in non-standalone
+         browsers (Safari tabs, Chrome, desktops), making this a no-op
+         elsewhere. */
+      [data-layout-variant],
+      #app-sidebar {
+        padding-top: env(safe-area-inset-top, 0px);
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+      }
+    </style>
     <title>Hermes Agent - Dashboard</title>
   </head>
   <body>
